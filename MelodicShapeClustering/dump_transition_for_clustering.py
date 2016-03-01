@@ -107,7 +107,7 @@ def get_transients(fileList, map_file, segExt = '.seg', pitchExt = '.pitchSilInt
 	cnt += 1
   
   print aggregate.shape
-  plt.show()
+  #plt.show()
   
   np.save('transientIds',np.array(ids_data))
   np.save('transientShapes',aggregate)
@@ -200,7 +200,9 @@ def clustering_scipy_dendrogram(features, metric='euclidean', method = 'complete
     plt.ylabel(np.array(ii+1))
   plt.show()
   
-  return clusters
+  np.save('centroids',np.array(centroids))
+  
+  return clusters, centroids
   
   
 def to_codebook(X, part):
@@ -226,7 +228,7 @@ def cluster_data(featureFile, id_file, map_file, output_file):
   #print features
   
   #clustering_scipy_kmeans(features)
-  cluster_ids = clustering_scipy_dendrogram(features)
+  cluster_ids, centroids = clustering_scipy_dendrogram(features)
   
   ids_data = np.load(id_file)
   
